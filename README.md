@@ -1,5 +1,49 @@
-# Vue 3 + Vite
+# io — учебный голосовой чат
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+**io** — Учебный веб-голосовой проект.  
+Цель — разобраться, как работает браузерный голосовой чат и взаимодействие клиента и сервера в реальном времени.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+## Идея
+
+Браузеры общаются через сервер:
+
+Browser A → Server → Browser B
+
+Сервер принимает события от одного клиента и пересылает их другому.  
+Позже через эту архитектуру будет передаваться голос.
+
+## Стек
+
+Frontend: Vue 3 + Vite  
+Backend: Node.js + Express + Socket.IO  
+Планируется: WebRTC + mediasoup
+
+## Структура проекта
+
+io
+├ client (Vue клиент)
+└ server (Node сервер)
+
+## Запуск
+
+Клиент:
+cd client  
+npm install  
+npm run dev
+
+Сервер:
+cd server  
+npm install  
+node index.js
+
+## Цель проекта
+
+Понять на практике:
+
+- как работает Node.js сервер
+- как браузер соединяется с сервером
+- как работают WebSocket соединения
+- как строятся real-time приложения
+- как передаётся голос между пользователями
+
+Проект создаётся постепенно: от простой связи браузер ↔ сервер до полноценного голосового чата.
