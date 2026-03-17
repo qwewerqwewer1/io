@@ -1,3 +1,9 @@
-﻿<template>
-  <h1 id="h11">404 сервер не работает!</h1>
+﻿<script setup>
+import VoiceChat from "./components/VoiceChat.vue";
+</script>
+
+<template>
+  <div>
+    <VoiceChat />
+  </div>
 </template>
