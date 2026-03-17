@@ -20,7 +20,6 @@ import { io } from "socket.io-client";
 export default {
   data() {
     return {
-      isConnected: false,
       connected: false,
       socketId: "",
       socket: null,
@@ -45,8 +44,6 @@ export default {
       }
 
       this.socket = io("http://localhost:3000");
-
-      this.isConnected ? "disconnect" : "connect";
 
       this.socket.on("connect", () => {
         console.log("✅ Подключено!");
