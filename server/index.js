@@ -1,38 +1,31 @@
-﻿// подключаем модуль Node, который умеет создавать HTTP сервер
-import http from "http";
-// подключаем фреймворк для обработки HTTP запросов
+﻿import http from "http";
 import express from "express";
-// вытаскиваем класс Сокет ИО для сигналинга
 import { Server } from "socket.io";
+// import cors from "cors";
 
-// порт, на котором будет работать сервер
-const myLocalPort = 3000;
+const PORT = 3000;
 
-// создаём приложение Express (обработчик HTTP запросов)
-const ReqAndRes = express();
+const app = express();
+let HTTP_SERVER_EXPRESS = http.createServer(app);
 
-// создаём настоящий HTTP сервер и передаём в него Express
-const httpWithReqAndResServer = http.createServer(ReqAndRes);
-
-const io = new Server(httpWithReqAndResServer, {
+// даем добро фронту слушать сервер
+const io = new Server(HTTP_SERVER_EXPRESS, {
   cors: {
-    // origin: "http://localhost:5173", // Разрешаем подключения с Vite
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: ["GET", "POST"],
   },
 });
 
-// ТЕПЕРЬ МОЖНО РАБОТАТЬ С СОКЕТАМИ
-io.on("connection", (socket) => {
-  console.log("Клиент подключился к сокету:", socket.id);
-
-  socket.on("disconnect", () => {
-    console.log("Клиент отключился:", socket.id);
-  });
+app.get("/", (req, res) => {
+  res.send("test");
+});
+let c = 1;
+io.on("connection", (socketFromServer) => {
+  console.log(c++);
+  socketFromServer.emit("emitPort", PORT);
 });
 
-// запускаем HTTP сервер на указанном порту
-httpWithReqAndResServer.listen(myLocalPort, () => {
-  console.log(`is UP MAN! on ${myLocalPort}`);
+// слушатель для порта //
+HTTP_SERVER_EXPRESS.listen(PORT, "0.0.0.0", () => {
+  console.log(`http://localhost:${PORT}/`);
 });
-/////////////////////////////////////////////////////////////
