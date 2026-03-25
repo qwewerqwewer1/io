@@ -19,9 +19,11 @@ const io = new Server(HTTP_SERVER_EXPRESS, {
 app.get("/", (req, res) => {
   res.send("test");
 });
-let c = 1;
-io.on("connection", (socketFromServer) => {
-  console.log(c++);
+
+let usersSockets = []; 
+
+io.on("connection", (socketUser) => {
+  usersSockets.push(socket)
   socketFromServer.emit("emitPort", PORT);
 });
 

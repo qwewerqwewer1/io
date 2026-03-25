@@ -6,7 +6,11 @@ import "vuetify/dist/vuetify.min.css"; // Vuetify 2 стили
 
 Vue.use(Vuetify);
 
-const vuetify = new Vuetify({});
+const vuetify = new Vuetify({
+  theme: {
+    dark: "true",
+  },
+});
 
 new Vue({
   vuetify,
